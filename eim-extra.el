@@ -102,7 +102,7 @@ If you don't like this funciton, set the variable to nil")
         (message (format "自定义输入(直接空格%s, 回车%c): "
                          (cdr eim-insert-ascii-char)
                          (car eim-insert-ascii-char)))
-        (setq c (read-event)) 
+        (setq c (read-char)) 
         (cond ((= c ? ) (insert (cdr eim-insert-ascii-char)))
               ((= c ?\r) (insert-char (car eim-insert-ascii-char) 1))
               (t 

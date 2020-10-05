@@ -1,11 +1,11 @@
 ;;; -*- coding: utf-8 -*-
-;;; eim-extra.el --- provide extra function for chinese input method 
+;;; eim-extra.el --- provide extra function for chinese input method
 
 ;; Copyright 2006 Ye Wenbin
 ;;
 ;; Author: wenbinye@163.com
 ;; Version: $Id: eim-extra.el,v 1.2 2007/01/14 01:51:51 ywb Exp $
-;; Keywords: 
+;; Keywords:
 ;; X-URL: not distributed yet
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -24,7 +24,7 @@
 
 ;;; Commentary:
 
-;; 
+;;
 
 ;; Put this file into your load-path and the following into your ~/.emacs:
 ;;   (require 'eim-extra)
@@ -49,7 +49,7 @@ If you don't like this funciton, set the variable to nil")
 ;;;_. handle punctuation
 (defun eim-read-punctuation (package)
   (let ((eim-current-package package)
-	buf punc-list punc)
+        buf punc-list punc)
     (setq buf (cdr (assoc "buffer" (car (eim-buffer-list)))))
     (save-excursion
       (set-buffer buf)
@@ -95,18 +95,18 @@ If you don't like this funciton, set the variable to nil")
           (> (prefix-numeric-value arg) 0))))
 
 ;;;_. 一个快速插入英文的命令。按自己的需要绑定到 ";"
-(defun eim-insert-ascii () 
-  (interactive) 
+(defun eim-insert-ascii ()
+  (interactive)
   (if current-input-method
       (let (c)
         (message (format "自定义输入(直接空格%s, 回车%c): "
                          (cdr eim-insert-ascii-char)
                          (car eim-insert-ascii-char)))
-        (setq c (read-char)) 
+        (setq c (read-char))
         (cond ((= c ? ) (insert (cdr eim-insert-ascii-char)))
               ((= c ?\r) (insert-char (car eim-insert-ascii-char) 1))
-              (t 
-               (setq unread-command-events (list last-input-event)) 
+              (t
+               (setq unread-command-events (list last-input-event))
                (insert (read-from-minibuffer "自定义输入: ")))))
     (call-interactively 'self-insert-command)))
 
@@ -131,7 +131,7 @@ If you don't like this funciton, set the variable to nil")
   (interactive)
   (let* ((eim-current-package package)
          (history (eim-history)))
-    (with-temp-buffer 
+    (with-temp-buffer
       (erase-buffer)
       (let (pos)
         (maphash (lambda (key val)
@@ -177,7 +177,7 @@ If you don't like this funciton, set the variable to nil")
              (setq eim-current-package
                    (if (= (length eim-package-list) 1)
                        (cdar eim-package-list)
-                     (assoc 
+                     (assoc
                       (completing-read "In package: "
                                        eim-package-list nil t
                                        (caar eim-package-list))
